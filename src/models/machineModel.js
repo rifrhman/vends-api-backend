@@ -12,7 +12,8 @@ const Machine = {
     db.query(quer, callback);
   },
   getById(id, callback) {
-    const quer = "SELECT * FROM machines WHERE id = ?";
+    const quer = `SELECT m.*, u.username AS updated_by_name 
+    FROM machines m JOIN users u ON m.updated_by = u.id WHERE m.id = ?`;
     db.query(quer, [id], callback);
   },
   update(id, name, type, status, updated_by, callback) {
